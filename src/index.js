@@ -1,15 +1,10 @@
-import React from 'react';
-import { View, Text } from 'react-native';
+import Web3 from 'web3';
 
-export default class App extends React.Component {
-    componentDidMount() {
-        console.log('Called first time');
-    }
-    render() {
-        return (
-            <View>
-                <Text>hi</Text>
-            </View>
-        )
-    }
+const App = () => {
+    const web3 = new Web3('http://localhost:7545'); // Ganache
+    console.log('Web33333', web3);
+    const newWallet = web3.eth.accounts.wallet.create(1);
+    const newAccount = newWallet[0];
+    console.log('newAAAAAAAAA',newAccount);
 }
+export default App;
