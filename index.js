@@ -8,6 +8,7 @@ import Allowance from './src/xrc20/allowance';
 import TransferXdc from './src/xrc20/transfer_xdc';
 import TransferToken from './src/xrc20/transfer_token';
 import IncreaseAllowance from './src/xrc20/increase_allowance';
+import TransferFrom from './src/xrc20/transfer_from';
 
 const XDCTestNet = async() => {
     const name = await Name();
@@ -15,12 +16,13 @@ const XDCTestNet = async() => {
     const decimals = await Decimal();
     const balanceOf = await BalanceOf();
     const totalSupply = await TotalSupply();
-    // const approve = await Approve();
-    const allowance = await Allowance();
+    const approve = await Approve();
+    // const allowance = await Allowance();
     // console.log('approveapprove',approve);
     // const transferxdc = await TransferXdc();
     // const transfertoken = await TransferToken();
-    const increaseallowance = await IncreaseAllowance();
+    // const transferFrom = await TransferFrom();
+    // const increaseallowance = await IncreaseAllowance();
     // console.log('transferxdctransferxdc',transferxdc);
 
     let Object = {
