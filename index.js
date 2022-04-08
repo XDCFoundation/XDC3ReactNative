@@ -6,6 +6,8 @@ import TotalSupply from './src/xrc20/total_supply';
 import Approve from './src/xrc20/approve';
 import Allowance from './src/xrc20/allowance';
 import TransferXdc from './src/xrc20/transfer_xdc';
+import TransferToken from './src/xrc20/transfer_token';
+import IncreaseAllowance from './src/xrc20/increase_allowance';
 
 const XDCTestNet = async() => {
     const name = await Name();
@@ -15,8 +17,11 @@ const XDCTestNet = async() => {
     const totalSupply = await TotalSupply();
     // const approve = await Approve();
     const allowance = await Allowance();
-    const transfer = await TransferXdc();
-    console.log('Transferrrr',transfer);
+    // console.log('approveapprove',approve);
+    // const transferxdc = await TransferXdc();
+    // const transfertoken = await TransferToken();
+    const increaseallowance = await IncreaseAllowance();
+    // console.log('transferxdctransferxdc',transferxdc);
 
     let Object = {
         name:name,
@@ -26,7 +31,9 @@ const XDCTestNet = async() => {
         totalSupply:totalSupply,
         // approve:approve,
         allowance:allowance,
-        transfer_token : transfer,
+        // transfer_xdc : transferxdc,
+        // transfer_token:transfertoken,
+        increase_allowance : increaseallowance
     }
     return Object;
 }

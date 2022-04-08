@@ -24,9 +24,8 @@ const TransferXdc = () => {
         let transfer_xdc = await httpProvider.sendTransaction(signedTxn);
         return transfer_xdc;
     }
-    transferxdc();
-    let Final = transferxdc().then((res)=>{return res}).catch((err) => console.log('Err',err))
-    return Final;
-    
+    // transferxdc();
+    let TransferXDC = transferxdc().then((res)=>{return res}).catch((err) => console.log('Err',err))
+    return TransferXDC;
 }
 export default TransferXdc;
