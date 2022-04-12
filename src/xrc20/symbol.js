@@ -1,16 +1,14 @@
 import { ethers } from 'ethers';
 import xrc20_abi from '../common/xrc20_abi.json';
-import { url, ERC20 } from '../../env';
 
-const Symbol = () => {
+const Symbol = (url,token_address) => {
     // Set Provider
     let httpProvider = new ethers.providers.WebSocketProvider(url);
 
-    let contract = new ethers.Contract(ERC20, xrc20_abi, httpProvider);
+    let contract = new ethers.Contract(token_address, xrc20_abi, httpProvider);
 
     let Symbol = contract.symbol().then(result => {return result})
-            .catch((err) => console.log('Error is', err))
-
+    
     return Symbol;
 }
 export default Symbol;

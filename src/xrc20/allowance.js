@@ -1,13 +1,12 @@
 import { ethers } from 'ethers';
 import xrc20_abi from '../common/xrc20_abi.json';
-import { url, ERC20 ,owneraddress,receiverAddress} from '../../env';
+import { url ,owneraddress,receiverAddress} from '../../env';
 
-const Allowance = () => {
+const Allowance = (token_address,owneraddress,receiverAddress) => {
     let httpProvider = new ethers.providers.WebSocketProvider(url)
-    let contract = new ethers.Contract(ERC20, xrc20_abi, httpProvider);
+    let contract = new ethers.Contract(token_address, xrc20_abi, httpProvider);
 
     let allowance = contract.allowance(owneraddress, receiverAddress).then(result => { return result.toString()})
-        .catch((err) => console.log('Error is', err));
 
     return allowance;
 }

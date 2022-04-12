@@ -1,8 +1,7 @@
 import { BigNumber, ethers } from 'ethers';
 import xrc20_abi from '../common/xrc20_abi.json';
-import { url, ERC20, privateKey,receiverAddress,owneraddress} from '../../env';
 
-const Approve = () => {
+const Approve = (url,token_address,privateKey,receiverAddress,owneraddress) => {
     let httpProvider = new ethers.providers.WebSocketProvider(url);
 
     storeTemp = async () => {
@@ -14,11 +13,11 @@ const Approve = () => {
         let transactionCount = await httpProvider.getTransactionCount(owneraddress);
         let gas_limit = "0x100000"
        
-        let contract = new ethers.Contract(ERC20, xrc20_abi, signer);
-        let newmethod = await contract.populateTransaction.approve(receiverAddress, "20");
+        let contract = new ethers.Contract(token_address, xrc20_abi, signer);
+        let newmethod = await contract.populateTransaction.approve(receiverAddress, "50");
 
         let txn = {
-            to: ERC20,//Token Address
+            to: token_address,//Token Address
             data: newmethod.data,
             gasPrice: gasPrice,
             gasLimit: ethers.utils.hexlify(gas_limit),
@@ -26,12 +25,10 @@ const Approve = () => {
         }
         let signedTxn = await signer.signTransaction(txn,privateKey);  
         let approve = await httpProvider.sendTransaction(signedTxn);
-
         return approve
     }
-    storeTemp();
-    // let Approvefunc = storeTemp().then((res)=>{return res}).catch((err) => console.log('Err',err));
-    // console.log('Approvefunc',Approvefunc);
-    // return Approvefunc;
+   
+    let approveMethod =   storeTemp().then((res)=>{return res}).catch((err) => console.log('Err',err))
+    return approveMethod;
 }
 export default Approve;

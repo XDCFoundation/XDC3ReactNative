@@ -1,9 +1,7 @@
 import { ethers } from 'ethers';
-import { url, owneraddress,receiverAddress,privateKey} from '../../env';
 
-const TransferXdc = () => {
-    
-    let send_token_amount = "10"
+const TransferXdc = (url,privateKey,owneraddress,receiverAddress,send_token_amount) => {
+
     // Set Provider
 
     transferxdc = async () => {
