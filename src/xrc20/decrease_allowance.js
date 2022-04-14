@@ -1,4 +1,4 @@
-import { BigNumber, ethers } from 'ethers';
+import { ethers } from 'ethers';
 import xrc20_abi from '../common/xrc20_abi.json';
 
 const DecreaseAllowance = (url,token_address, privateKey, receiverAddress, owneraddress,value) => {
@@ -15,10 +15,8 @@ const DecreaseAllowance = (url,token_address, privateKey, receiverAddress, owner
         let contract = new ethers.Contract(token_address, xrc20_abi, signer);
 
         let allowance = await contract.allowance(owneraddress, receiverAddress);
-        let amount = parseInt(allowance) - value;
-        console.log('sdhshdcd', amount);
+        let amount = parseInt(allowance) - parseInt(value);
         let newmethod = await contract.populateTransaction.approve(receiverAddress, amount);
-        console.log('newmthoddsss', newmethod);
         let txn = {
             to: token_address,//Token Address
             data: newmethod.data,
@@ -26,14 +24,11 @@ const DecreaseAllowance = (url,token_address, privateKey, receiverAddress, owner
             gasLimit: ethers.utils.hexlify(gas_limit),
             nonce: transactionCount,
         };
-        console.log('Transaction is', txn);
         let signedTxn = await signer.signTransaction(txn, privateKey);
-        console.log('alloowwwwoowwo', signedTxn);
         let approve = await httpProvider.sendTransaction(signedTxn);
-        console.log('sdhcsdhjsd', approve);
         return approve
     }
-    let decreaseapprove =   storeTemp().then((res)=>{return res}).catch((err) => console.log('Err',err))
+    let decreaseapprove =   storeTemp().then((res)=>{return res})
     return decreaseapprove;
 }
 export default DecreaseAllowance;

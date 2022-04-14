@@ -1,4 +1,4 @@
-import { BigNumber, ethers } from 'ethers';
+import { ethers } from 'ethers';
 import xrc20_abi from '../common/xrc20_abi.json';
 
 const IncreaseAllowance = (url,token_address, privateKey, receiverAddress, owneraddress,value) => {
@@ -15,7 +15,7 @@ const IncreaseAllowance = (url,token_address, privateKey, receiverAddress, owner
         let contract = new ethers.Contract(token_address, xrc20_abi, signer);
 
         let allowance = await contract.allowance(owneraddress, receiverAddress);
-        let amount = parseInt(allowance) + value;
+        let amount = parseInt(allowance) + parseInt(value);
         let newmethod = await contract.populateTransaction.approve(receiverAddress, amount);
         let txn = {
             to: token_address,//Token Address
@@ -28,7 +28,7 @@ const IncreaseAllowance = (url,token_address, privateKey, receiverAddress, owner
         let approve = await httpProvider.sendTransaction(signedTxn);
         return approve
     }
-    let increaseapprove =   storeTemp().then((res)=>{return res}).catch((err) => console.log('Err',err))
+    let increaseapprove =   storeTemp().then((res)=>{return res})
     return increaseapprove;
 }
 export default IncreaseAllowance;

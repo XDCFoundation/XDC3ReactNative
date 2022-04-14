@@ -1,5 +1,5 @@
 {
-  "name": "xdc-sdk-react-native",
+  "name": "xdc3-react-native",
   "version": "1.0.0",
   "description": "Implementing XRC-20 using XDC testnet , XDC wallet support.",
   "main": "index.js",

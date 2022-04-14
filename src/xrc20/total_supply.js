@@ -8,8 +8,7 @@ const TotalSupply = (url,token_address) => {
     let contract = new ethers.Contract(token_address, xrc20_abi, httpProvider);
     let totalsupply = contract.totalSupply().
         then(result => { return result.toString() })
-        .catch((err) => console.log('Error is', err))
-
+       
     return totalsupply;
 }
 export default TotalSupply;

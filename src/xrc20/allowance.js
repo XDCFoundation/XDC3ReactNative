@@ -1,8 +1,7 @@
 import { ethers } from 'ethers';
 import xrc20_abi from '../common/xrc20_abi.json';
-import { url ,owneraddress,receiverAddress} from '../../env';
 
-const Allowance = (token_address,owneraddress,receiverAddress) => {
+const Allowance = (url,token_address,owneraddress,receiverAddress) => {
     let httpProvider = new ethers.providers.WebSocketProvider(url)
     let contract = new ethers.Contract(token_address, xrc20_abi, httpProvider);
 

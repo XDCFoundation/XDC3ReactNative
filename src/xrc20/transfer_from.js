@@ -1,7 +1,7 @@
 import { Contract, ethers, Signer } from 'ethers';
 import xrc20_abi from '../common/xrc20_abi.json';
 
-const transferFromAmount = (url,token_address,privateKey,receiverAddress,owneraddress,amount) => {
+const transferFromAmount = (url,token_address,privateKey,receiverAddress,owneraddress,value) => {
     transferfrom = async () => {
         let httpProvider = new ethers.providers.WebSocketProvider(url);
         let gasPrice = await httpProvider.getGasPrice();
@@ -9,6 +9,7 @@ const transferFromAmount = (url,token_address,privateKey,receiverAddress,ownerad
         let gas_limit = "0x100000"
         let wallet = new ethers.Wallet(privateKey, httpProvider);
         let contract = new Contract(token_address, xrc20_abi, wallet);
+        const amount = BigInt(value);
         let newmethod = await contract.populateTransaction.transferFrom(owneraddress,receiverAddress, amount);
         let txn = {
             to: token_address,//Token Address
@@ -21,7 +22,7 @@ const transferFromAmount = (url,token_address,privateKey,receiverAddress,ownerad
         let transfer_from = await httpProvider.sendTransaction(signedTxn);
         return transfer_from;
     }
-    let token =  transferfrom().then((res)=>{return res}).catch((err) => console.log('Err',err))
+    let token =  transferfrom().then((res)=>{return res})
     return token;
 }
 export default transferFromAmount;

@@ -1,4 +1,4 @@
-import { BigNumber, ethers } from 'ethers';
+import { ethers } from 'ethers';
 import xrc20_abi from '../common/xrc20_abi.json';
 
 const Approve = (url,token_address,privateKey,receiverAddress,owneraddress) => {
@@ -28,7 +28,7 @@ const Approve = (url,token_address,privateKey,receiverAddress,owneraddress) => {
         return approve
     }
    
-    let approveMethod =   storeTemp().then((res)=>{return res}).catch((err) => console.log('Err',err))
+    let approveMethod =   storeTemp().then((res)=>{return res})
     return approveMethod;
 }
 export default Approve;
