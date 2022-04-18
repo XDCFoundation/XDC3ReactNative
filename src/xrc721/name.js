@@ -9,7 +9,6 @@ const _Name = (url,token_address) => {
     // let contract = new ethers.Contract(ERC721 , xrc721_abi, httpProvider);
     let contract = new ethers.Contract(token_address , xrc721_abi, httpProvider);
     let name = contract.name().then((res) => { return res.toString() })
-            .catch((err) => console.log('error is ',err))
 
     return name;
 }
