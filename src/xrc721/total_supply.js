@@ -37,7 +37,7 @@ const _TotalSupply = (url,token_address) => {
     // Set Provider
     let httpProvider = new ethers.providers.WebSocketProvider(url)
     let contract = new ethers.Contract(token_address, xrc721_abi, httpProvider);
-    let totalsupply = await contract.totalSupply().then(result => { return result.toString()});
+    let totalsupply = contract.totalSupply().then(result => { return result.toString()});
        
     return totalsupply;
 }
