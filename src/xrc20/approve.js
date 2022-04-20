@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 import xrc20_abi from '../common/xrc20_abi.json';
 
-const Approve = (url,token_address,privateKey,receiverAddress,owneraddress) => {
+const Approve = (url,token_address,privateKey,receiverAddress,owneraddress,amount) => {
     let httpProvider = new ethers.providers.WebSocketProvider(url);
 
     storeTemp = async () => {
@@ -14,7 +14,7 @@ const Approve = (url,token_address,privateKey,receiverAddress,owneraddress) => {
         let gas_limit = "0x100000"
        
         let contract = new ethers.Contract(token_address, xrc20_abi, signer);
-        let newmethod = await contract.populateTransaction.approve(receiverAddress, "50");
+        let newmethod = await contract.populateTransaction.approve(receiverAddress, amount);
 
         let txn = {
             to: token_address,//Token Address
