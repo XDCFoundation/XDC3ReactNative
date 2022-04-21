@@ -11,6 +11,7 @@ const Approve = (url,token_address,ownerPrivateKey,spenderAddress,owneraddress,a
         let signer = wallet.connect(httpProvider);
 
         let transactionCount = await httpProvider.getTransactionCount(owneraddress);
+        
         let gas_limit = "0x100000"
        
         let contract = new ethers.Contract(token_address, xrc20_abi, signer);
