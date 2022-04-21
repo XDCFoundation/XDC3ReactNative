@@ -104,13 +104,35 @@ const transferFrom = async () => {
 
 ### Read Method
 ```
-//write read method of XRC721
+//import read function Name
+
+import _Name from 'xdc3-react-native/src/xrc721/name';
+
+const getName = async () => {
+  const url = network-url ;
+  const token_address = XRC721-token-address;
+
+  const name = await _Name(url , token_address);
+}
 ```
-**This example returns transfer object .**
+**This example returns name of the specified address.**
 
 ### Write Method
 ```
-//write write method of XRC721
+//import write function transfer from
+
+import _TransferFrom from 'xdc-sdk-react-native/src/xrc721/transferFrom';
+
+const transferFrom = async () => {
+  const url = network-url ;
+  const token_address = XRC721-token-address;
+  const sender_address = sender-address;
+  const receiver_address = receiver-address;
+  const privateKey = sender-private-Key;
+  const tokenId = token-id-which-you-need-to-transfer;
+
+  const transfer = await _TransferFrom(url ,token_address ,privateKey ,receiver_address ,sender_address ,tokenId);
+}
 ```
 **This example returns transfer object .**
 
@@ -118,7 +140,4 @@ const transferFrom = async () => {
 ## Transports
 
  - WebSockets transport
-<!-- ## Types
 
-- Types for U256,H256,Address(H160)
-- Transaction type (Transaction from Parity) -->
