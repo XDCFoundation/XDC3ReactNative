@@ -1,7 +1,7 @@
 
 # xdc3-react-native
 
-xdc3-react-native SDK with support for smart contracts, XRC20 .
+xdc3-react-native SDK with support for smart contracts, XRC20 and XRC721.
 
 
 
@@ -26,7 +26,7 @@ npm i xdc3-react-native
 ```
 ## This SDK supports following Read & Write operations:-
 
-  |    XRC20 Token: Read methods                    |   XRC20 Token: Write methods                          |
+  |    **XRC20 Token: Read methods**                    |   **XRC20 Token: Write methods**                          |
   |     ---                                         |   ---                                                 | 
   |     name(url , token_address)                                      |   approve(url , token_address ,privateKey , receiverAddress , owneraddress)                   |
   |     symbol(url , token_address)                                    |   transferToken(url , token_address , privateKey , receiverAddress , owneraddress , amount)                         |
@@ -35,6 +35,23 @@ npm i xdc3-react-native
   |     balanceOf(url , token_address , owneraddress)                          |   decreaseAllowance(url , token_address , privateKey , receiverAddress , owneraddress , value)         |
   |     allowance(url , token_address , owneraddress , receiverAddress)                  |   transferXDC(url , privateKey , owneraddress , receiverAddress , send_token_amount)  |
   |                                               |                                                       |
+  |                                               |                                                       |
+  |                                               |                                                       |
+  | **XRC721 Token: Read methods** | **XRC721 Token: Write methods** |
+  |_Name(url,token_address)|setApprovalAll(url,token_address,ownerPrivateKey,spenderAddress,owneraddress,booleanValue)|
+  |_Symbol(url,token_address)|_Approve(url,token_address,ownerPrivateKey,spenderAddress,owneraddress,tokenId)|
+  | _TotalSupply(url,token_address)|_TransferFrom(url,token_address,spendarprivateKey,receiverAddress,spenderAddress,tokenId)|
+  |_BalanceOf(url,token_address,owneraddress)|_safeTransferFrom(url,token_address,spendarprivateKey,receiverAddress,spenderAddress,tokenId)|
+  |OwnerOf(url,token_address,tokenId)||
+  |TokenUri(url,token_address,tokenId)||
+  |TokenByIndex(url,token_address,tokenIndex)||
+  |TokenByOwnerIndex(url,token_address,owneraddress,tokenIndex)||
+  |SupportInterface(url,token_address,interfaceId)||
+  |GetApproved(url,token_address,tokenId)||
+  |ApprovalAll(url,token_address,owneraddress,receiverAddress)||
+  |||
+  
+ 
 
 ## Environment Variable
 
@@ -80,6 +97,21 @@ const transferFrom = async () => {
 }
 ```
 
+**This example returns transfer object .**
+
+
+## Example for XRC721
+
+### Read Method
+```
+//write read method of XRC721
+```
+**This example returns transfer object .**
+
+### Write Method
+```
+//write write method of XRC721
+```
 **This example returns transfer object .**
 
 
