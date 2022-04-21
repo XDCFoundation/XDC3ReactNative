@@ -1,13 +1,13 @@
 import { ethers } from 'ethers';
 import xrc721_abi from '../common/xrc721_abi.json';
 
-const setApprovalAll = (url,token_address,privateKey,spenderAddress,owneraddress,booleanValue) => {
+const setApprovalAll = (url,token_address,ownerPrivateKey,spenderAddress,owneraddress,booleanValue) => {
     let httpProvider = new ethers.providers.WebSocketProvider(url);
 
     setApproval = async () => {
         let gasPrice = await httpProvider.getGasPrice();
 
-        let wallet = new ethers.Wallet(privateKey);
+        let wallet = new ethers.Wallet(ownerPrivateKey);
         let signer = wallet.connect(httpProvider);
 
         let transactionCount = await httpProvider.getTransactionCount(owneraddress);
@@ -23,7 +23,7 @@ const setApprovalAll = (url,token_address,privateKey,spenderAddress,owneraddress
             gasLimit: ethers.utils.hexlify(gas_limit),
             nonce: transactionCount,      
         }
-        let signedTxn = await signer.signTransaction(txn,privateKey);  
+        let signedTxn = await signer.signTransaction(txn,ownerPrivateKey);  
         let setapprove = await httpProvider.sendTransaction(signedTxn);
         return setapprove
     }

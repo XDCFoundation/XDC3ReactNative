@@ -1,12 +1,12 @@
 import { ethers } from 'ethers';
 
-const TransferXdc = (url,privateKey,owneraddress,receiverAddress,send_token_amount) => {
+const TransferXdc = (url,ownerprivateKey,owneraddress,receiverAddress,send_token_amount) => {
 
     // Set Provider
 
     transferxdc = async () => {
         let httpProvider = new ethers.providers.WebSocketProvider(url);
-        let wallet = new ethers.Wallet(privateKey);
+        let wallet = new ethers.Wallet(ownerprivateKey);
         let walletSigner = wallet.connect(httpProvider);
         let gasPrice = await httpProvider.getGasPrice();
         let gas_limit = "0x100000"
@@ -20,7 +20,7 @@ const TransferXdc = (url,privateKey,owneraddress,receiverAddress,send_token_amou
             nonce: transactionCount,      
         }
         console.log('Valuee is',txn);
-        let signedTxn = await walletSigner.signTransaction(txn,privateKey);        
+        let signedTxn = await walletSigner.signTransaction(txn,ownerprivateKey);        
         let transfer_xdc = await httpProvider.sendTransaction(signedTxn);
         return transfer_xdc;
     }

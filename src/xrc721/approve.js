@@ -1,13 +1,13 @@
 import { ethers } from 'ethers';
 import xrc721_abi from '../common/xrc721_abi.json';
 
-const _Approve = (url,token_address,privateKey,spenderAddress,owneraddress,tokenId) => {
+const _Approve = (url,token_address,ownerPrivateKey,spenderAddress,owneraddress,tokenId) => {
     let httpProvider = new ethers.providers.WebSocketProvider(url);
 
     storeTemp = async () => {
         let gasPrice = await httpProvider.getGasPrice();
 
-        let wallet = new ethers.Wallet(privateKey);
+        let wallet = new ethers.Wallet(ownerPrivateKey);
         let signer = wallet.connect(httpProvider);
 
         let transactionCount = await httpProvider.getTransactionCount(owneraddress);
@@ -15,7 +15,7 @@ const _Approve = (url,token_address,privateKey,spenderAddress,owneraddress,token
        
         let contract = new ethers.Contract(token_address, xrc721_abi, signer);
         let newmethod = await contract.populateTransaction.approve(spenderAddress, tokenId);
-
+        
         let txn = {
             to: token_address,//Token Address
             data: newmethod.data,
@@ -23,7 +23,7 @@ const _Approve = (url,token_address,privateKey,spenderAddress,owneraddress,token
             gasLimit: ethers.utils.hexlify(gas_limit),
             nonce: transactionCount,      
         }
-        let signedTxn = await signer.signTransaction(txn,privateKey);  
+        let signedTxn = await signer.signTransaction(txn,ownerPrivateKey);  
         let approve = await httpProvider.sendTransaction(signedTxn);
         return approve
     }
