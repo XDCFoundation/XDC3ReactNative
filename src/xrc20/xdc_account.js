@@ -1,11 +1,14 @@
-import {encryptPrivateKey} from 'hdwallet';
+import 'react-native-get-random-values';
 
-const _createAccount = (url) => {
+// Import the the ethers shims (**BEFORE** ethers)
+import '@ethersproject/shims';
+import { ethers } from 'ethers';
+
+const _createAccount = () => {
+    // let mnemonic = "announce room limb pattern dry unit scale effort hard jazz weasel alcohol"
     // let httpProvider = new ethers.providers.WebSocketProvider(url);
-    // console.log('httpProvider1',httpProvider);
-    let wallet = ethers.Wallet.createRandom()
-
-    // let wallet = ethers.Wallet;
-    console.log('Wallet is',wallet)
+    // console.log('httpProvider',httpProvider);
+    let wallet = ethers.Wallet.createRandom();
+     console.log('walletwallet',wallet);
 }
 export default _createAccount;
