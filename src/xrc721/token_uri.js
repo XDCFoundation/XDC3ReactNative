@@ -4,8 +4,7 @@ import xrc721_abi from '../common/xrc721_abi.json';
 const TokenUri = (url,token_address,tokenId) => {
     // Set Provider
     let httpProvider = new ethers.providers.WebSocketProvider(url);
-    // const signer = httpProvider.getSigner();
-
+    
     let contract = new ethers.Contract(token_address, xrc721_abi, httpProvider);
 
     let tokenuri = contract.tokenURI(tokenId).then(result => { return result })
