@@ -15,7 +15,6 @@ const Approve = (url, token_address, ownerPrivateKey, spenderAddress, owneraddre
 
         let contract = new ethers.Contract(token_address, xrc20_abi, signer);
         let newmethod = await contract.populateTransaction.approve(spenderAddress, amount);
-
         let txn = {
             to: token_address,//Token Address
             data: newmethod.data,
