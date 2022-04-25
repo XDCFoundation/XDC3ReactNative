@@ -1,6 +1,7 @@
 import { ethers } from 'ethers';
 import xrc721_abi from '../common/xrc721_abi.json';
 
+// Gets the Name of the specified address.
 const _Name = (url,token_address) => {
 
     // HTTPProvider:

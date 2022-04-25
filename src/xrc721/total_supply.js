@@ -1,6 +1,7 @@
 import { ethers } from 'ethers';
 import xrc721_abi from '../common/xrc721_abi.json';
 
+// Gets the owner of an NFT
 const _TotalSupply = (url,token_address) => {
 
     // HTTPProvider:

@@ -1,6 +1,11 @@
 import { ethers } from 'ethers';
 import xrc721_abi from '../common/xrc721_abi.json';
 
+// Enable or disable approval for a third party ("operator") to manage all of `Owner`'s assets
+// Emits the ApprovalForAll event. The contract MUST allow multiple operators per owner.
+// required arguments.
+// token address, owner address, ownerPrivateKey, sepnder address, tokenId.
+
 const setApprovalAll = (url,token_address,ownerPrivateKey,spenderAddress,owneraddress,booleanValue) => {
     // HTTPProvider:
     let httpProvider = new ethers.providers.WebSocketProvider(url);

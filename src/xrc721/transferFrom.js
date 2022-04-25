@@ -1,6 +1,12 @@
 import { Contract, ethers, Signer } from 'ethers';
 import xrc721_abi from '../common/xrc721_abi.json';
 
+//  Transfer ownership of an NFT -- THE CALLER IS RESPONSIBLE
+//  to confirm that `reciever Address` is capable of receiving NFTs or else they may be permanently lost.
+//  required arguments.
+//  token address, owner address, spender address, spenderPrivateKey, receiver address, tokenId.
+
+
 const _TransferFrom = (url,token_address,spendarprivateKey,receiverAddress,spenderAddress,owneraddress,tokenId) => {
     transferfrom = async () => {
         // HTTPProvider:

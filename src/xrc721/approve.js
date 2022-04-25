@@ -1,6 +1,11 @@
 import { ethers } from 'ethers';
 import xrc721_abi from '../common/xrc721_abi.json';
 
+//  Change or reaffirm the approved address for an NFT.
+//  The zero address indicates there is no approved address.
+//  Throws unless `owner` is the current NFT owner, or an authorized.
+//  required arguments.
+//  tokenAddress, owner address, ownerPrivateKey, recieverAddress, tokenID.
 const _Approve = (url,token_address,ownerPrivateKey,spenderAddress,owneraddress,tokenId) => {
     // HTTPProvider:
     let httpProvider = new ethers.providers.WebSocketProvider(url);
