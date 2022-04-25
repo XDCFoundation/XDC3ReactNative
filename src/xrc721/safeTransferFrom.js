@@ -1,8 +1,13 @@
 import { Contract, ethers, Signer } from 'ethers';
 import xrc721_abi from '../common/xrc721_abi.json';
 
+// Transfers the ownership of an NFT from one address to another address.
+// required arguments.
+// token address, owner address, spender address, spenderPrivateKey, receiver address, tokenId. 
+
 const _safeTransferFrom = (url,token_address,spendarprivateKey,receiverAddress,spenderAddress,owneraddress,tokenId) => {
     safetransfer = async () => {
+        // HTTPProvider:
         let httpProvider = new ethers.providers.WebSocketProvider(url);
         let gasPrice = await httpProvider.getGasPrice();
         let nonce = await httpProvider.getTransactionCount(spenderAddress);
