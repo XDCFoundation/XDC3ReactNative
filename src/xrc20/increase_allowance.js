@@ -4,6 +4,7 @@ import xrc20_abi from '../common/xrc20_abi.json';
 // increase the amount of tokens that an owner allowed to a spender.
 // This function required arguments.
 // owner address, ownerPrivateKey, spender address, token address, amount.
+
 const IncreaseAllowance = (url, token_address, privateKey, receiverAddress, owneraddress, value) => {
     // HTTPProvider:
     let httpProvider = new ethers.providers.WebSocketProvider(url);
