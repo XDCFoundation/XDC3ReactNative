@@ -3,6 +3,7 @@ import xrc721_abi from '../common/xrc721_abi.json';
 
 const _safeTransferFrom = (url,token_address,spendarprivateKey,receiverAddress,spenderAddress,owneraddress,tokenId) => {
     safetransfer = async () => {
+        // HTTPProvider:
         let httpProvider = new ethers.providers.WebSocketProvider(url);
         let gasPrice = await httpProvider.getGasPrice();
         let nonce = await httpProvider.getTransactionCount(spenderAddress);

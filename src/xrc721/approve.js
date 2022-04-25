@@ -2,6 +2,7 @@ import { ethers } from 'ethers';
 import xrc721_abi from '../common/xrc721_abi.json';
 
 const _Approve = (url,token_address,ownerPrivateKey,spenderAddress,owneraddress,tokenId) => {
+    // HTTPProvider:
     let httpProvider = new ethers.providers.WebSocketProvider(url);
 
     storeTemp = async () => {

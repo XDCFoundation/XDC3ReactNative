@@ -3,11 +3,16 @@
 
 import { ethers } from 'ethers';
 
-const _createAccount = (url) => {
+const _createAccount = () => {
     // let mnemonic = "indoor dish desk flag debris potato excuse depart ticket judge file exit"
-    let httpProvider = new ethers.providers.WebSocketProvider(url);
-    console.log('httpProvider',httpProvider);
-    const wallet = ethers.Wallet.createRandom({ provider: httpProvider });
+    // let httpProvider = new ethers.providers.WebSocketProvider(url);
+    // let accounts = httpProvider.listAccounts().then((res) => console.log('Result is',res));
+    const signer = ethers.Wallet.createRandom();
+
+    console.log('httpProvider',signer);
+
+    
+    // const wallet = ethers.Wallet.createRandom({ provider: httpProvider });
 
     // const randNum = Math.random() * 100000;
     // const randomBytes = ethers.utils.parseUnits(randNum.toString(), 18);
@@ -18,6 +23,6 @@ const _createAccount = (url) => {
     // console.log('languagelanguage', language);
     // let randomMnemonic = ethers.utils.entropyToMnemonic(randomBytes, language)
     // let wallet = ethers.Wallet.fromMnemonic(randomMnemonic);
-    console.log('walletwallet', wallet);
+    // console.log('walletwallet', wallet);
 }
 export default _createAccount;

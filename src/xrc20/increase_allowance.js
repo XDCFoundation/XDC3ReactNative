@@ -1,7 +1,11 @@
 import { ethers } from 'ethers';
 import xrc20_abi from '../common/xrc20_abi.json';
 
-const IncreaseAllowance = (url,token_address, privateKey, receiverAddress, owneraddress,value) => {
+// increase the amount of tokens that an owner allowed to a spender.
+// This function required arguments.
+// owner address, ownerPrivateKey, spender address, token address, amount.
+const IncreaseAllowance = (url, token_address, privateKey, receiverAddress, owneraddress, value) => {
+    // HTTPProvider:
     let httpProvider = new ethers.providers.WebSocketProvider(url);
 
     storeTemp = async () => {
@@ -25,11 +29,12 @@ const IncreaseAllowance = (url,token_address, privateKey, receiverAddress, owner
             gasLimit: ethers.utils.hexlify(gas_limit),
             nonce: transactionCount,
         };
+
         let signedTxn = await signer.signTransaction(txn, privateKey);
         let approve = await httpProvider.sendTransaction(signedTxn);
         return approve
     }
-    let increaseapprove =   storeTemp().then((res)=>{return res})
+    let increaseapprove = storeTemp().then((res) => { return res })
     return increaseapprove;
 }
 export default IncreaseAllowance;

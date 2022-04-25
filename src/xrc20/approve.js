@@ -1,7 +1,12 @@
 import { ethers } from 'ethers';
 import xrc20_abi from '../common/xrc20_abi.json';
 
+// Approve the passed address to spend the specified amount of tokens on behalf of owner.
+// This function required arguments.
+// ownerAddress, ownerPrivateKey, spenderAddress, tokenAddr, amount.
+
 const Approve = (url, token_address, ownerPrivateKey, spenderAddress, owneraddress, amount) => {
+    // HTTPProvider:
     let httpProvider = new ethers.providers.WebSocketProvider(url);
 
     storeTemp = async () => {
@@ -23,6 +28,7 @@ const Approve = (url, token_address, ownerPrivateKey, spenderAddress, owneraddre
             gasLimit: ethers.utils.hexlify(gas_limit),
             nonce: transactionCount,
         }
+
         let signedTxn = await signer.signTransaction(txn, ownerPrivateKey);
         let approve = await httpProvider.sendTransaction(signedTxn);
         return approve
