@@ -1,7 +1,7 @@
 {
   "name": "xdc3-react-native",
   "version": "1.0.0",
-  "description": "Implementing XRC-20 using XDC testnet , XDC wallet support.",
+  "description": "Implementing XRC-20 using XDC network , XDC wallet support.",
   "main": "index.js",
   "scripts": {
     "start": "react-app-rewired start",
@@ -9,15 +9,10 @@
     "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://Swati_Saingar@bitbucket.org/leewayhertz/xdc-sdk-react-native.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://bitbucket.org/leewayhertz/xdc-sdk-react-native/issues"
-  },
+  
+  "author": "XDC Foundation",
+  "license": "MIT",
+  
   "homepage": "https://bitbucket.org/leewayhertz/xdc-sdk-react-native#readme",
   "devDependencies": {
     "babel-plugin-rewrite-require": "^1.14.5",

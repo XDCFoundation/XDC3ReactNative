@@ -21,7 +21,7 @@ const setApprovalAll = (url,token_address,ownerPrivateKey,spenderAddress,ownerad
        
         let contract = new ethers.Contract(token_address, xrc721_abi, signer);
         let newmethod = await contract.populateTransaction.setApprovalForAll(spenderAddress, booleanValue);
-
+        console.log('newmethodnewmethod',newmethod.data,booleanValue);
         let txn = {
             to: token_address,//Token Address
             data: newmethod.data,
@@ -29,6 +29,7 @@ const setApprovalAll = (url,token_address,ownerPrivateKey,spenderAddress,ownerad
             gasLimit: ethers.utils.hexlify(gas_limit),
             nonce: transactionCount,      
         }
+        console.log('Transaction',txn);
         let signedTxn = await signer.signTransaction(txn,ownerPrivateKey);  
         let setapprove = await httpProvider.sendTransaction(signedTxn);
         return setapprove
