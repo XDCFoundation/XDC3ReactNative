@@ -57,7 +57,7 @@ npm i xdc3-react-native
 
 Create a .env file in the root directory of the react-native project to put the wallet and endpoint information in like so: 
 ```
-APOTHEM_ADDRESS = wss://ws.apothem.network
+export const url = 'wss://ws.apothem.network';
 ```
 ## Example for XRC20
 
@@ -136,8 +136,4 @@ const transferFrom = async () => {
 ```
 **This example returns transfer object .**
 
-
-## Transports
-
- - WebSockets transport
 
