@@ -26,7 +26,6 @@ const Approve = (url, token_address, ownerPrivateKey, spenderAddress, owneraddre
         var balance = ethers.utils.formatEther(newvalue.toString());
         let allowance = await contract.allowance(owneraddress, spenderAddress);
         if (((amount > parseInt(balance)) && ((allowance.toString()) > parseInt(balance)))) {
-            console.log('executedd');
             return 'amount exceeds balance'
         }
         let newmethod = await contract.populateTransaction.approve(spenderAddress, amount);
