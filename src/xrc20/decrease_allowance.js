@@ -5,7 +5,7 @@ import xrc20_abi from '../common/xrc20_abi.json';
 // This function required arguments.
 // owner address, ownerPrivateKey, spender address, token address, amount.
 
-const DecreaseAllowance = (url, token_address, privateKey, receiverAddress, owneraddress, value) => {
+const DecreaseAllowance = (url, token_address, privateKey, spenderAddr, owneraddress, value) => {
     // HTTPProvider:
     let httpProvider = new ethers.providers.WebSocketProvider(url);
 
@@ -18,16 +18,25 @@ const DecreaseAllowance = (url, token_address, privateKey, receiverAddress, owne
         let transactionCount = await httpProvider.getTransactionCount(owneraddress);
         let contract = new ethers.Contract(token_address, xrc20_abi, signer);
 
-        let allowance = await contract.allowance(owneraddress, receiverAddress);
+        let allowance = await contract.allowance(owneraddress, spenderAddr);
         let amount = parseInt(allowance) - parseInt(value);
-        let newmethod = await contract.populateTransaction.approve(receiverAddress, amount);
-        let gas_limit = "0x100000"
+
+        if (allowance >= value) {
+            amount = parseInt(allowance) - parseInt(value);
+        }
+        else {
+            amount = parseInt(value) - parseInt(allowance);
+        }
+        let newmethod = await contract.populateTransaction.approve(spenderAddr, amount);
+        let estimatevalue = await httpProvider.estimateGas({
+            from: owneraddress,
+        });
 
         let txn = {
             to: token_address,//Token Address
             data: newmethod.data,
             gasPrice: gasPrice,
-            gasLimit: ethers.utils.hexlify(gas_limit),
+            gasLimit: estimatevalue,
             nonce: transactionCount,
         };
 

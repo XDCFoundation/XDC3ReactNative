@@ -16,21 +16,33 @@ const Approve = (url, token_address, ownerPrivateKey, spenderAddress, owneraddre
         let signer = wallet.connect(httpProvider);
 
         let transactionCount = await httpProvider.getTransactionCount(owneraddress);
-        let gas_limit = "0x100000"
+
+        let estimatevalue = await httpProvider.estimateGas({
+            from: owneraddress,
+        });
 
         let contract = new ethers.Contract(token_address, xrc20_abi, signer);
+        let newvalue = await contract.balanceOf(owneraddress);
+        var balance = ethers.utils.formatEther(newvalue.toString());
+        let allowance = await contract.allowance(owneraddress, spenderAddress);
+        if (((amount > parseInt(balance)) && ((allowance.toString()) > parseInt(balance)))) {
+            console.log('executedd');
+            return 'amount exceeds balance'
+        }
         let newmethod = await contract.populateTransaction.approve(spenderAddress, amount);
 
         let txn = {
             to: token_address,//Token Address
             data: newmethod.data,
             gasPrice: gasPrice,
-            gasLimit: ethers.utils.hexlify(gas_limit),
+            gasLimit: estimatevalue,
             nonce: transactionCount,
         }
 
         let signedTxn = await signer.signTransaction(txn, ownerPrivateKey);
+
         let approve = await httpProvider.sendTransaction(signedTxn);
+
         return approve
     }
 

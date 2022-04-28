@@ -14,15 +14,24 @@ const TransferToken = (url, token_address, ownerprivateKey, receiverAddress, own
         let wallet = new ethers.Wallet(ownerprivateKey, httpProvider);
         let contract = new Contract(token_address, xrc20_abi, wallet);
         const amount = ethers.utils.parseEther(value);
+        let newvalue = await contract.balanceOf(owneraddress);
+        var balance = ethers.utils.formatEther(newvalue.toString());
+        if (parseInt(value) > parseInt(balance)) {
+            return "amount exceeds balance"
+        }
         let newmethod = await contract.populateTransaction.transfer(receiverAddress, amount);
-        let estimatevalue = await httpProvider.estimateGas({
+         let estimatevalue = await httpProvider.estimateGas({
             from: owneraddress
-        })
+        });
+        var estimate = estimatevalue.toString();
+        if ((estimate.length) % 2 !== 0) {
+            estimate = '0x0' + estimate;
+        }
         let txn = {
             to: token_address,//Token Address
             data: newmethod.data,
             gasPrice: gasPrice,
-            gasLimit: estimatevalue,
+            gasLimit: estimate,
             nonce: nonce,
         }
 

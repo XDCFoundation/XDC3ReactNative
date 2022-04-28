@@ -10,7 +10,10 @@ const TotalSupply = (url, token_address) => {
     let contract = new ethers.Contract(token_address, xrc20_abi, httpProvider);
 
     let totalsupply = contract.totalSupply().
-        then(result => { return result.toString() })
+        then(result => {
+            var newvalue = ethers.utils.formatEther(result.toString());
+            return newvalue
+        })
 
     return totalsupply;
 }

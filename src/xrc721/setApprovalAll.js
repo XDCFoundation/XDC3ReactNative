@@ -17,19 +17,19 @@ const setApprovalAll = (url,token_address,ownerPrivateKey,spenderAddress,ownerad
         let signer = wallet.connect(httpProvider);
 
         let transactionCount = await httpProvider.getTransactionCount(owneraddress);
-        let gas_limit = "0x100000"
+        let estimatevalue = await httpProvider.estimateGas({
+            from: owneraddress
+        });
        
         let contract = new ethers.Contract(token_address, xrc721_abi, signer);
         let newmethod = await contract.populateTransaction.setApprovalForAll(spenderAddress, booleanValue);
-        console.log('newmethodnewmethod',newmethod.data,booleanValue);
         let txn = {
             to: token_address,//Token Address
             data: newmethod.data,
             gasPrice: gasPrice,
-            gasLimit: ethers.utils.hexlify(gas_limit),
+            gasLimit: estimatevalue,
             nonce: transactionCount,      
         }
-        console.log('Transaction',txn);
         let signedTxn = await signer.signTransaction(txn,ownerPrivateKey);  
         let setapprove = await httpProvider.sendTransaction(signedTxn);
         return setapprove

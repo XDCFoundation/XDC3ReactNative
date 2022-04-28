@@ -17,12 +17,16 @@ const transferFromAmount = (url, token_address, spendarprivateKey, receiverAddre
         let newmethod = await contract.populateTransaction.transferFrom(owneraddress, receiverAddress, amount);
         let estimatevalue = await httpProvider.estimateGas({
             from: spenderAddr
-        })
+        });
+        var estimate = estimatevalue.toString();
+        if ((estimate.length) % 2 !== 0) {
+            estimate = '0x0' + estimate;
+        }
         let txn = {
             to: token_address,//Token Address
             data: newmethod.data,
             gasPrice: gasPrice,
-            gasLimit: estimatevalue,
+            gasLimit: estimate,
             nonce: nonce,
         }
 

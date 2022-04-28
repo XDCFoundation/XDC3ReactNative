@@ -15,13 +15,19 @@ const _safeTransferFrom = (url,token_address,spendarprivateKey,receiverAddress,s
         let contract = new Contract(token_address, xrc721_abi, wallet);
         let newmethod = await contract.populateTransaction.safeTransferFrom(owneraddress,receiverAddress, tokenId);
        
-        let gas_limit = "0x100000"
-
+        let estimatevalue = await httpProvider.estimateGas({
+            from: spenderAddress
+        });
+        var estimate = estimatevalue.toString();
+        if ((estimate.length) % 2 !== 0) {
+            estimate = '0x0' + estimate;
+        }
+       
         let txn = {
             to: token_address,//Token Address
             data: newmethod.data,
             gasPrice: gasPrice,
-            gasLimit: ethers.utils.hexlify(gas_limit),
+            gasLimit: estimate,
             nonce: nonce,
         }
         let signedTxn = await wallet.signTransaction(txn, spendarprivateKey);
