@@ -18,13 +18,15 @@ const IncreaseAllowance = (url, token_address, privateKey, spenderAddr, owneradd
         let contract = new ethers.Contract(token_address, xrc20_abi, signer);
 
         let allowance = await contract.allowance(owneraddress, spenderAddr);
-        let amount = parseInt(allowance) + parseInt(value);
+        var finalAllowance = ethers.utils.formatEther(allowance.toString());
+        let amount = parseInt(finalAllowance) + parseInt(value);
         let newvalue = await contract.balanceOf(owneraddress);
         var balance = ethers.utils.formatEther(newvalue.toString());
         if (parseInt(amount) > parseInt(balance)) {
             return "amount exceeds balance"
         }
-        let newmethod = await contract.populateTransaction.approve(spenderAddr, amount);
+        const finalAmount = ethers.utils.parseEther(amount.toString());
+        let newmethod = await contract.populateTransaction.approve(spenderAddr, finalAmount);
         let estimatevalue = await httpProvider.estimateGas({
             from: owneraddress,
         });

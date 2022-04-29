@@ -14,6 +14,7 @@ const transferFromAmount = (url, token_address, spendarprivateKey, receiverAddre
         let wallet = new ethers.Wallet(spendarprivateKey, httpProvider);
         let contract = new Contract(token_address, xrc20_abi, wallet);
         const amount = ethers.utils.parseEther(value);
+       
         let newmethod = await contract.populateTransaction.transferFrom(owneraddress, receiverAddress, amount);
         let estimatevalue = await httpProvider.estimateGas({
             from: spenderAddr
@@ -29,7 +30,6 @@ const transferFromAmount = (url, token_address, spendarprivateKey, receiverAddre
             gasLimit: estimate,
             nonce: nonce,
         }
-
         let signedTxn = await wallet.signTransaction(txn, spendarprivateKey);
         let transfer_from = await httpProvider.sendTransaction(signedTxn);
         return transfer_from;

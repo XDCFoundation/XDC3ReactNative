@@ -10,7 +10,10 @@ const Allowance = (url, token_address, owneraddress, spenderAddr) => {
     let httpProvider = new ethers.providers.WebSocketProvider(url)
     let contract = new ethers.Contract(token_address, xrc20_abi, httpProvider);
 
-    let allowance = contract.allowance(owneraddress, spenderAddr).then(result => { return result.toString() })
+    let allowance = contract.allowance(owneraddress, spenderAddr).then(result => {
+        var newvalue = ethers.utils.formatEther(result.toString());
+        return newvalue
+    });
 
     return allowance;
 }

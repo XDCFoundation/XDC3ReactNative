@@ -19,15 +19,19 @@ const DecreaseAllowance = (url, token_address, privateKey, spenderAddr, owneradd
         let contract = new ethers.Contract(token_address, xrc20_abi, signer);
 
         let allowance = await contract.allowance(owneraddress, spenderAddr);
-        let amount = parseInt(allowance) - parseInt(value);
+        var finalAllowance = ethers.utils.formatEther(allowance.toString());
+        let amount = parseInt(finalAllowance) - parseInt(value)
 
-        if (allowance >= value) {
-            amount = parseInt(allowance) - parseInt(value);
+        if (parseInt(finalAllowance) >= parseInt(value)) {
+            amount = parseInt(finalAllowance) - parseInt(value)
         }
         else {
-            amount = parseInt(value) - parseInt(allowance);
+            amount = parseInt(value) - parseInt(finalAllowance);
         }
-        let newmethod = await contract.populateTransaction.approve(spenderAddr, amount);
+
+        const finalAmount = ethers.utils.parseEther(amount.toString());
+
+        let newmethod = await contract.populateTransaction.approve(spenderAddr, finalAmount);
         let estimatevalue = await httpProvider.estimateGas({
             from: owneraddress,
         });
